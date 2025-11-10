@@ -1,7 +1,6 @@
 package org.example.mvcapplications.controllers;
 
 import javafx.collections.ObservableList;
-import org.example.mvcapplications.models.DatabaseAccess;
 import org.example.mvcapplications.models.Department;
 
 public class DepartmentController {
@@ -11,7 +10,7 @@ public class DepartmentController {
     }
 
     public ObservableList<Department> getDepartments() {
-        return DatabaseAccess.getAllDepartments();
+        return Department.getAllDepartments();
     }
 
 }
