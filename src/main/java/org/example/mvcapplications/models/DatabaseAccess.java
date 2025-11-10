@@ -59,4 +59,24 @@ public class DatabaseAccess {
         return employees;
     }
 
+    public static ObservableList<Department> getAllDepartments() {
+        ObservableList<Department> departments = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM departments";
+
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                departments.add(new Department(
+                        resultSet.getInt("departmentID"),
+                        resultSet.getString("departmentName")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return departments;
+    }
+
 }
