@@ -24,6 +24,4 @@ module org.example.mvcapplications {
     opens org.example.mvcapplications to javafx.graphics, javafx.fxml; // main app class
     opens org.example.mvcapplications.views to javafx.fxml;
     opens org.example.mvcapplications.models to javafx.base;
-    exports org.example.mvcapplications.controllers;
-    opens org.example.mvcapplications.controllers to javafx.base;
 }

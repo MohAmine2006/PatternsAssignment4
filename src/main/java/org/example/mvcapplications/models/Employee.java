@@ -1,6 +1,14 @@
 package org.example.mvcapplications.models;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.example.mvcapplications.controllers.ConnectionManager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Employee {
     private final IntegerProperty id;
@@ -36,12 +44,52 @@ public class Employee {
     public IntegerProperty departmentIdProperty() {
         return departmentId;
     }
+
+    public static ObservableList<Employee> getAllEmployees() {
+        ObservableList<Employee> employees = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM employees";
+
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                employees.add(new Employee(
+                        resultSet.getInt("employeeID"),
+                        resultSet.getString("firstName"),
+                        resultSet.getString("lastName"),
+                        resultSet.getDouble("salary"),
+                        resultSet.getInt("departmentID")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employees;
+    }
+
+    public static ObservableList<Employee> getEmployeesByFirstName(String firstName) {
+        ObservableList<Employee> employees = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM employees WHERE firstName = ?";
+
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, firstName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                employees.add(new Employee(
+                        resultSet.getInt("employeeID"),
+                        resultSet.getString("firstName"),
+                        resultSet.getString("lastName"),
+                        resultSet.getDouble("salary"),
+                        resultSet.getInt("departmentID")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employees;
+    }
 }
-//    public static ObservableList<Employee> getAllEmployees(){
-//        ObservableList<Employee> employeeData = FXCollections.observableArrayList(
-//                new Employee(1, "John", "Doe", 60000.00, 101),
-//                new Employee(2, "Jane", "Smith", 75000.00, 102),
-//                new Employee(3, "Peter", "Jones", 85000.00, 101)
-//        );
-//        return employeeData;
-//    }

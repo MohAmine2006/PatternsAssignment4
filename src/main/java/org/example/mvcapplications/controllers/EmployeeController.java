@@ -1,6 +1,5 @@
 package org.example.mvcapplications.controllers;
 
-import org.example.mvcapplications.models.DatabaseAccess;
 import org.example.mvcapplications.models.Employee;
 import javafx.collections.ObservableList;
 
@@ -11,11 +10,11 @@ public class EmployeeController {
     }
 
     public ObservableList<Employee> getEmployees() {
-        return DatabaseAccess.getAllEmployees();
+        return Employee.getAllEmployees();
     }
 
     public ObservableList<Employee> getEmployeesByFirstName(String firstName) {
-        return DatabaseAccess.getEmployeesByFirstName(firstName);
+        return Employee.getEmployeesByFirstName(firstName);
     }
 
 }
