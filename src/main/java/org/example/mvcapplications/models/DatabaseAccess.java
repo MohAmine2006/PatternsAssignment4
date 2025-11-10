@@ -1,4 +1,4 @@
-//package org.example.mvcapplications.models;
+package org.example.mvcapplications.models;
 //
 //import org.example.mvcapplications.controllers.ConnectionManager;
 //import javafx.collections.FXCollections;
