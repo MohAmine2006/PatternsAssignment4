@@ -2,7 +2,6 @@ package org.example.mvcapplications.controllers;
 
 import org.example.mvcapplications.models.DatabaseAccess;
 import org.example.mvcapplications.models.Employee;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class EmployeeController {

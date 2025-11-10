@@ -1,8 +1,6 @@
 package org.example.mvcapplications.models;
 
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class Employee {
     private final IntegerProperty id;
@@ -38,7 +36,7 @@ public class Employee {
     public IntegerProperty departmentIdProperty() {
         return departmentId;
     }
-
+}
 //    public static ObservableList<Employee> getAllEmployees(){
 //        ObservableList<Employee> employeeData = FXCollections.observableArrayList(
 //                new Employee(1, "John", "Doe", 60000.00, 101),
@@ -47,5 +45,3 @@ public class Employee {
 //        );
 //        return employeeData;
 //    }
-
-}
