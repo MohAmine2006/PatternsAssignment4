@@ -1,8 +1,8 @@
 package org.example.mvcapplications.models;
 
-import org.example.mvcapplications.controllers.ConnectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.example.mvcapplications.controllers.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,6 +57,27 @@ public class DatabaseAccess {
             e.printStackTrace();
         }
         return employees;
+    }
+
+    public static ObservableList<Project> getAllProjects() {
+        ObservableList<Project> projects = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM projects";
+
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                projects.add(new Project(
+                        resultSet.getInt("projectID"),
+                        resultSet.getString("projectName"),
+                        resultSet.getDouble("budget")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return projects;
     }
 
 }

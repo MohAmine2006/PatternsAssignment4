@@ -2,7 +2,6 @@ package org.example.mvcapplications.views;
 
 import org.example.mvcapplications.controllers.EmployeeController;
 import org.example.mvcapplications.models.Employee;
-import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
